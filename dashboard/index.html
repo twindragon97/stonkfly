@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@ try {
   if (t === 'light') document.documentElement.dataset.theme = 'light';
 } catch (e) {}
 </script>
-<title>Stonkfly 神經儀表板</title>
+<title>Stonkfly - Panel neuronal</title>
 <style>
 :root{
   --bg:#060a13;--panel:#0d1422;--panel2:#111a2c;--line:#1c2840;--text:#dde6f6;--mute:#7c89a3;
@@ -178,46 +178,46 @@ body.staged #flyCard .flyframe{width:100%;height:100%}
 <div class="wrap">
 <div class="stage-fit" id="stageFit"><div class="stage" id="stage">
 <header>
-  <h1><b translate="no">STONKFLY</b> <span class="coin" translate="no">–</span> 果蠅</h1>
-  <span id="status" class="pill">載入中…</span>
-  <span class="pill" title="這個網頁只讀取交易程式的紀錄，不能下單，也不能改任何狀態"><span aria-hidden="true">🔒</span> 唯讀</span>
-  <span class="stat">第 <strong id="tick">–</strong> 步</span>
-  <span class="stat">模擬淨值 <strong id="equity">–</strong> USDC</span>
+  <h1><b translate="no">STONKFLY</b> <span class="coin" translate="no">–</span> Mosca</h1>
+  <span id="status" class="pill">Cargando…</span>
+  <span class="pill" title="Esta página solo lee los registros del trader; no puede enviar órdenes ni modificar el estado"><span aria-hidden="true">🔒</span> Solo lectura</span>
+  <span class="stat">Paso <strong id="tick">–</strong></span>
+  <span class="stat">Patrimonio simulado <strong id="equity">–</strong> USDC</span>
   <span class="stat"><span class="coin" translate="no">–</span> <strong id="price">–</strong></span>
-  <span class="stat">下一步 <strong id="next">–</strong></span>
-  <span class="stat">本步模擬耗時 <strong id="compute">–</strong></span>
+  <span class="stat">Siguiente paso <strong id="next">–</strong></span>
+  <span class="stat">Tiempo de cálculo <strong id="compute">–</strong></span>
   <nav class="stat" id="flies"></nav>
-  <button class="themebtn" id="themeToggle" type="button" aria-label="切換到白天模式"><span aria-hidden="true">☀️</span> 白天模式</button>
+  <button class="themebtn" id="themeToggle" type="button" aria-label="Cambiar al modo claro"><span aria-hidden="true">☀️</span> Modo claro</button>
 </header>
 
 <div class="flow" id="flow">
-  <div class="st"><b>① 價格畫成圖</b>最近 100&nbsp;分鐘的 <span class="coin" translate="no">–</span> 走勢畫成 320×180 彩色圖</div>
-  <div class="st"><b>② 眼睛看圖</b>3,335&nbsp;個感光細胞看亮度、811&nbsp;個看藍/綠色</div>
-  <div class="st"><b>③ 神經傳遞 0.5&nbsp;秒</b>16.6&nbsp;萬神經元、2,560&nbsp;萬條真實連線，逐 0.1&nbsp;ms 模擬放電</div>
-  <div class="st"><b>④ 讀出決策</b>比較左右兩顆 <span translate="no">DNp20</span> 的放電頻率，<span translate="no">DNpe017</span> 當閘門</div>
-  <div class="st"><b>⑤ 下單</b>買／賣／持有；風控只能否決，不能替牠換決定</div>
-  <div class="st fb"><b>↺ 回饋學習</b>賺錢刺激 <span translate="no">PAM11</span> 多巴胺、虧錢刺激 <span translate="no">PPL101</span>，改變蕈狀體 <span translate="no">KC→MBON</span> 突觸強度</div>
+  <div class="st"><b>① El precio se convierte en imagen</b>Los últimos 100&nbsp;minutos de <span class="coin" translate="no">–</span> se dibujan como una imagen en color de 320×180</div>
+  <div class="st"><b>② Los ojos observan la imagen</b>3.335&nbsp;fotorreceptores observan la luminosidad y 811 observan azul/verde</div>
+  <div class="st"><b>③ Propagación neuronal durante 0,5&nbsp;s</b>166.000&nbsp;neuronas y 25,6&nbsp;millones de conexiones reales; la actividad se simula cada 0,1&nbsp;ms</div>
+  <div class="st"><b>④ Lectura de la decisión</b>Se compara la frecuencia de disparo izquierda y derecha de <span translate="no">DNp20</span>; <span translate="no">DNpe017</span> actúa como compuerta</div>
+  <div class="st"><b>⑤ Orden</b>comprar / vender / mantener; el control de riesgo solo puede vetar la decisión, no sustituirla</div>
+  <div class="st fb"><b>↺ Aprendizaje por refuerzo</b>Las ganancias estimulan <span translate="no">PAM11</span> dopamina; las pérdidas estimulan <span translate="no">PPL101</span>, modificando la intensidad sináptica <span translate="no">KC→MBON</span> del cuerpo pedunculado</div>
 </div>
 
 <div class="grid">
   <div class="col">
     <div class="card">
-      <h2><span aria-hidden="true">🧠</span> 大腦＋腹神經索：放電即時動畫</h2>
-      <p class="sub">每個點是一個神經元的細胞體位置（MaleCNS 實測座標）。每一步新資料進來時，訊號從眼睛依真實突觸距離一層層傳進大腦；之後每個神經元依上一步的實際頻率閃爍（慢動作 ×8）。拖曳或方向鍵旋轉、Ctrl＋滾輪或 ＋／－ 縮放、滑鼠移上去看是什麼神經元。</p>
-      <div class="brainbox" id="brainbox" tabindex="0" role="region" aria-label="果蠅大腦與腹神經索的神經元放電動畫（方向鍵旋轉，＋／－縮放）">
+      <h2><span aria-hidden="true">🧠</span> Cerebro + cordón nervioso ventral: actividad neuronal en tiempo real</h2>
+      <p class="sub">Cada punto representa la posición del soma de una neurona (coordenadas medidas en MaleCNS). Cuando llega un nuevo paso, la señal se propaga desde los ojos hacia el cerebro siguiendo la distancia sináptica real. Después, cada neurona parpadea según su frecuencia real del paso anterior (cámara lenta ×8). Arrastra o usa las flechas para rotar, Ctrl + rueda o +/− para hacer zoom y coloca el cursor sobre una neurona para identificarla.</p>
+      <div class="brainbox" id="brainbox" tabindex="0" role="region" aria-label="Animación de la actividad neuronal del cerebro y cordón nervioso ventral de la mosca (flechas para rotar, +/− para zoom)">
         <canvas id="brain"></canvas><canvas id="overlay"></canvas><div id="tip"></div>
       </div>
       <div class="tools">
-        <button id="bReplay" class="accent" title="只在瀏覽器重跑動畫，不會下單">▶ 重播動畫（不會下單）</button>
-        <button id="bAuto" class="on" aria-pressed="true">自動旋轉</button>
-        <button id="bFront">正面</button>
-        <button id="bSide">側面</button>
-        <button id="bTop">俯視</button>
-        <button id="bZoomIn" aria-label="放大大腦視圖">＋</button>
-        <button id="bZoomOut" aria-label="縮小大腦視圖">－</button>
-        <button id="bMode">改成：依區域著色</button>
-        <button id="bKC" aria-pressed="false">顯示記憶細胞 KC</button>
-        <button id="bEye" aria-pressed="false">標出感光細胞</button>
+        <button id="bReplay" class="accent" title="Reproduce de nuevo la animación solo en el navegador; no envía órdenes">▶ Repetir animación (no envía órdenes)</button>
+        <button id="bAuto" class="on" aria-pressed="true">Rotación automática</button>
+        <button id="bFront">Frontal</button>
+        <button id="bSide">Lateral</button>
+        <button id="bTop">Superior</button>
+        <button id="bZoomIn" aria-label="Ampliar vista del cerebro">＋</button>
+        <button id="bZoomOut" aria-label="Reducir vista del cerebro">－</button>
+        <button id="bMode">Cambiar a: colorear por región</button>
+        <button id="bKC" aria-pressed="false">Mostrar células de memoria KC</button>
+        <button id="bEye" aria-pressed="false">Resaltar fotorreceptores</button>
       </div>
       <div class="legend" id="legend"></div>
     </div>
@@ -225,43 +225,43 @@ body.staged #flyCard .flyframe{width:100%;height:100%}
 
   <div class="col">
     <div class="card" id="eyeCard">
-      <h2><span aria-hidden="true">👁</span> 果蠅的眼睛</h2>
+      <h2><span aria-hidden="true">👁</span> MoscaOjo de la mosca</h2>
       <p class="sub" id="eyeSub"></p>
-      <div class="eyebox"><canvas id="eye" width="640" height="360" role="img" aria-label="果蠅眼睛：價格圖與每個感光細胞看到的亮度"></canvas></div>
-      <div class="tools"><button id="bEyeMode">改成：只看果蠅看到的</button></div>
+      <div class="eyebox"><canvas id="eye" width="640" height="360" role="img" aria-label="MoscaOjo de la mosca: gráfico de precio y luminosidad percibida por cada fotorreceptor"></canvas></div>
+      <div class="tools"><button id="bEyeMode">Cambiar a: mostrar solo lo que ve la mosca</button></div>
     </div>
 
     <div class="card" id="decCard">
-      <h2><span aria-hidden="true">🎯</span> 這一步的決策</h2>
+      <h2><span aria-hidden="true">🎯</span> Decisión de este paso</h2>
       <div class="decision"><div class="big" id="side">–</div><div class="exec" id="exec"></div></div>
       <div class="bars" translate="no">
-        <span>DNp20 左</span><div class="bar"><div id="barL" style="background:var(--sell);color:var(--sell)"></div></div><span class="num" id="numL">–</span>
-        <span>DNp20 右</span><div class="bar"><div id="barR" style="background:var(--buy);color:var(--buy)"></div></div><span class="num" id="numR">–</span>
-        <span>右 − 左</span><div class="bar"><div id="barD"></div></div><span class="num" id="numD">–</span>
-        <span>DNpe017 閘門</span><div class="bar"><div id="barG" style="background:var(--hot);color:var(--hot)"></div></div><span class="num" id="numG">–</span>
+        <span>DNp20 izquierda</span><div class="bar"><div id="barL" style="background:var(--sell);color:var(--sell)"></div></div><span class="num" id="numL">–</span>
+        <span>DNp20 derecha</span><div class="bar"><div id="barR" style="background:var(--buy);color:var(--buy)"></div></div><span class="num" id="numR">–</span>
+        <span>Derecha − izquierda</span><div class="bar"><div id="barD"></div></div><span class="num" id="numD">–</span>
+        <span>Compuerta DNpe017</span><div class="bar"><div id="barG" style="background:var(--hot);color:var(--hot)"></div></div><span class="num" id="numG">–</span>
       </div>
-      <div class="rule">規則（固定、人工設計）：閘門有放電，且 右−左 &gt; 2&nbsp;Hz → <b style="color:var(--buy)">買</b>；&lt; −2&nbsp;Hz → <b style="color:var(--sell)">賣</b>；其他 → 持有。</div>
+      <div class="rule">Regla (fija y diseñada manualmente): si la compuerta dispara y derecha−izquierda &gt; 2&nbsp;Hz → <b style="color:var(--buy)">COMPRAR</b>; &lt; −2&nbsp;Hz → <b style="color:var(--sell)">VENDER</b>; en cualquier otro caso → MANTENER.</div>
     </div>
 
     <div class="card" id="daCard">
-      <h2><span aria-hidden="true">💊</span> 回饋刺激</h2>
+      <h2><span aria-hidden="true">💊</span> Estímulo de refuerzo</h2>
       <p class="sub" id="reinf">–</p>
       <div class="bars" translate="no">
-        <span>PAM11 獎勵</span><div class="bar"><div id="barRw" style="background:var(--buy);color:var(--buy)"></div></div><span class="num" id="numRw">–</span>
-        <span>PPL101 懲罰</span><div class="bar"><div id="barAv" style="background:var(--sell);color:var(--sell)"></div></div><span class="num" id="numAv">–</span>
-        <span>KC 記憶細胞</span><div class="bar"><div id="barKC" style="background:var(--violet);color:var(--violet)"></div></div><span class="num" id="numKC">–</span>
+        <span>Recompensa PAM11</span><div class="bar"><div id="barRw" style="background:var(--buy);color:var(--buy)"></div></div><span class="num" id="numRw">–</span>
+        <span>Castigo PPL101</span><div class="bar"><div id="barAv" style="background:var(--sell);color:var(--sell)"></div></div><span class="num" id="numAv">–</span>
+        <span>Células de memoria KC</span><div class="bar"><div id="barKC" style="background:var(--violet);color:var(--violet)"></div></div><span class="num" id="numKC">–</span>
       </div>
     </div>
 
     <div class="card flycard" id="flyCard">
-      <h2><span aria-hidden="true">🪰</span> 果蠅交易員動畫 <span class="flynow" id="flyNow" aria-live="polite"></span></h2>
+      <h2><span aria-hidden="true">🪰</span> MoscaAnimación del trader <span class="flynow" id="flyNow" aria-live="polite"></span></h2>
       <div class="flybody">
-        <div class="flygif" id="flyBox" hidden><div class="flyframe"><video id="flyVid" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video><button class="flyctl" id="flyToggle" aria-pressed="false" aria-label="暫停果蠅動畫">❚❚ 暫停</button></div></div>
-        <ul class="flylegend" id="flyLegend" aria-label="四種動畫代表的狀態">
-          <li data-anim="buy"><b><span aria-hidden="true">🚀</span> 買進成交</b><span>火箭登月</span></li>
-          <li data-anim="sell_profit"><b><span aria-hidden="true">💸</span> 賣出賺錢</b><span>噴鈔派對</span></li>
-          <li data-anim="sell_loss"><b><span aria-hidden="true">⛺</span> 賣出虧損</b><span>破帳篷躺地</span></li>
-          <li data-anim="hold"><b><span aria-hidden="true">🧼</span> 其他狀態</b><span>觀望、被風控擋下或停機時搓手洗臉</span></li>
+        <div class="flygif" id="flyBox" hidden><div class="flyframe"><video id="flyVid" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video><button class="flyctl" id="flyToggle" aria-pressed="false" aria-label="Pausar animación de la mosca">❚❚ Pausar</button></div></div>
+        <ul class="flylegend" id="flyLegend" aria-label="Estados representados por las cuatro animaciones">
+          <li data-anim="buy"><b><span aria-hidden="true">🚀</span> Compra ejecutada</b><span>Cohete a la Luna</span></li>
+          <li data-anim="sell_profit"><b><span aria-hidden="true">💸</span> Venta con beneficio</b><span>Fiesta de billetes</span></li>
+          <li data-anim="sell_loss"><b><span aria-hidden="true">⛺</span> Venta con pérdida</b><span>Tienda rota / derrota</span></li>
+          <li data-anim="hold"><b><span aria-hidden="true">🧼</span> Otros estados</b><span>Esperando, vetada por riesgo o detenida</span></li>
         </ul>
       </div>
     </div>
@@ -270,18 +270,18 @@ body.staged #flyCard .flyframe{width:100%;height:100%}
 
 </div></div><!-- /stage -->
 <div class="charts">
-  <div class="card"><h2><span aria-hidden="true">📈</span> <span class="coin" translate="no">–</span> 價格與模擬淨值</h2><p class="sub">藍線：<span class="coin" translate="no">–</span> 買價；黃線：模擬帳戶淨值（右軸）。▲ 買 ▼ 賣</p><div id="cPrice"></div></div>
-  <div class="card"><h2><span aria-hidden="true">↔</span> 左右 <span translate="no">DNp20</span> 放電差（Hz）</h2><p class="sub">虛線是 ±2&nbsp;Hz 門檻；點的顏色＝當步決策（灰點＝閘門沒開或差距不夠）</p><div id="cDiff"></div></div>
-  <div class="card"><h2><span aria-hidden="true">💊</span> 多巴胺放電</h2><p class="sub">綠：PAM11 獎勵；紅：PPL101 懲罰（受損益刺激時才會高）</p><div id="cDA"></div></div>
-  <div class="card"><h2><span aria-hidden="true">🧬</span> 記憶突觸變化</h2><p class="sub">紫線：已改變的 KC→MBON 突觸數（共 7,835&nbsp;條）；青線：平均強度（1＝原始）</p><div id="cMem"></div></div>
-  <div class="card"><h2><span aria-hidden="true">🗺</span> 各區域平均放電頻率</h2><p class="sub">上一步 0.5&nbsp;秒，每個神經元平均 Hz</p><div class="scbars" id="scbars"></div></div>
-  <div class="card"><h2><span aria-hidden="true">⚖</span> 記憶突觸強度分佈</h2><p class="sub">7,835&nbsp;條 KC→MBON07/11 突觸；1.0＝原始強度，&lt;1＝被多巴胺削弱</p><div id="cHist"></div></div>
+  <div class="card"><h2><span aria-hidden="true">📈</span> <span class="coin" translate="no">–</span> Precio y patrimonio simulado</h2><p class="sub">Línea azul: <span class="coin" translate="no">–</span> precio bid; línea amarilla: patrimonio de la cuenta simulada (eje derecho). ▲ compra ▼ venta</p><div id="cPrice"></div></div>
+  <div class="card"><h2><span aria-hidden="true">↔</span> Diferencia izquierda/derecha de <span translate="no">DNp20</span> (Hz)</h2><p class="sub">La línea discontinua marca el umbral de ±2&nbsp;Hz; el color del punto indica la decisión del paso (gris = compuerta cerrada o diferencia insuficiente)</p><div id="cDiff"></div></div>
+  <div class="card"><h2><span aria-hidden="true">💊</span> Actividad dopaminérgica</h2><p class="sub">Verde: recompensa PAM11; rojo: castigo PPL101 (aumentan cuando los activa el resultado de la operación)</p><div id="cDA"></div></div>
+  <div class="card"><h2><span aria-hidden="true">🧬</span> Cambios en las sinapsis de memoria</h2><p class="sub">Línea violeta: número de sinapsis KC→MBON modificadas (7.835 en total); línea cian: intensidad media (1 = original)</p><div id="cMem"></div></div>
+  <div class="card"><h2><span aria-hidden="true">🗺</span> Frecuencia media de disparo por región</h2><p class="sub">Media de Hz por neurona durante los 0,5&nbsp;s del paso anterior</p><div class="scbars" id="scbars"></div></div>
+  <div class="card"><h2><span aria-hidden="true">⚖</span> Distribución de intensidad de las sinapsis de memoria</h2><p class="sub">7.835&nbsp;sinapsis KC→MBON07/11; 1,0 = intensidad original, &lt;1 = debilitada por dopamina</p><div id="cHist"></div></div>
 </div>
 
 <p class="foot">
-資料：<span id="runpath"></span>（paper 模擬交易，唯讀）。每 4&nbsp;秒檢查一次，新的一步出來就播放動畫並更新。<br>
-動畫說明：程式每 0.5&nbsp;秒只記錄「每個神經元放了幾次電」，沒有記錄每次放電的時間。傳遞波的先後是依「離眼睛幾個突觸」排的示意；閃爍頻率是真實的上一步放電頻率（放慢 8&nbsp;倍）。<br>
-注意：「買／賣神經元」與「賺錢／虧錢多巴胺」都是人為指定的介面；連線來自真實果蠅連接體，但神經動力學與學習規則未經生物驗證，也未證明能獲利。
+Datos: <span id="runpath"></span>(paper trading simulado, solo lectura). Se comprueba cada 4&nbsp;segundos y, cuando aparece un nuevo paso, la animación se reproduce y se actualiza.<br>
+Nota sobre la animación: cada 0,5&nbsp;s el programa solo registra cuántas veces disparó cada neurona; no registra el instante exacto de cada disparo. El orden de propagación es una representación basada en el número de sinapsis desde el ojo; la frecuencia de parpadeo corresponde a la actividad real del paso anterior, ralentizada ×8.<br>
+Aviso: las “neuronas de compra/venta” y la dopamina asociada a “ganancia/pérdida” son interfaces diseñadas artificialmente. Las conexiones proceden de un conectoma real de Drosophila, pero la dinámica neuronal y las reglas de aprendizaje no están validadas biológicamente ni se ha demostrado que sean rentables.
 </p>
 </div>
 
@@ -296,20 +296,20 @@ const cssv = name => getComputedStyle(document.documentElement).getPropertyValue
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)');
 let flyPaused = REDUCED.matches;
 
-const ZH = {
-  ENS:'腸神經', ascending_neuron:'上行神經元（身體→腦）', cb_efferent:'中央腦傳出', cb_endocrine:'中央腦內分泌',
-  cb_intrinsic:'中央腦內部', cb_motor:'腦運動神經', cb_sensory:'腦感覺神經', descending_neuron:'下行神經元（腦→身體）',
-  efferent_ascending:'傳出上行', efferent_descending:'傳出下行', ol_intrinsic:'視葉內部', ol_sensory:'眼睛感光細胞',
-  sensory_ascending:'感覺上行', sensory_descending:'感覺下行', visual_centrifugal:'視覺離心', visual_projection:'視覺投射（眼→腦）',
-  vnc_efferent:'腹神經索傳出', vnc_endocrine:'腹神經索內分泌', vnc_intrinsic:'腹神經索內部', vnc_motor:'腹神經索運動',
-  vnc_sensory:'腹神經索感覺', vnc_tbc:'腹神經索（待確認）', unassigned:'未分類'
+const ES = {
+  ENS:'Sistema nervioso entérico', ascending_neuron:'Neurona ascendente (cuerpo→cerebro)', cb_efferent:'Eferente del cerebro central', cb_endocrine:'Endocrina del cerebro central',
+  cb_intrinsic:'Intrínseca del cerebro central', cb_motor:'Motora cerebral', cb_sensory:'Sensorial cerebral', descending_neuron:'Neurona descendente (cerebro→cuerpo)',
+  efferent_ascending:'Eferente ascendente', efferent_descending:'Eferente descendente', ol_intrinsic:'Intrínseca del lóbulo óptico', ol_sensory:'Fotorreceptor',
+  sensory_ascending:'Sensorial ascendente', sensory_descending:'Sensorial descendente', visual_centrifugal:'Visual centrífuga', visual_projection:'Proyección visual (ojo→cerebro)',
+  vnc_efferent:'Eferente del cordón nervioso ventral', vnc_endocrine:'Endocrina del cordón nervioso ventral', vnc_intrinsic:'Intrínseca del cordón nervioso ventral', vnc_motor:'Motora del cordón nervioso ventral',
+  vnc_sensory:'Sensorial del cordón nervioso ventral', vnc_tbc:'Cordón nervioso ventral (por confirmar)', unassigned:'Sin clasificar'
 };
-const zh = s => ZH[s] || (s.endsWith('_tbc') ? (ZH[s.slice(0,-4)] || s.slice(0,-4)) + '（待確認）' : s);
+const zh = s => ES[s] || (s.endsWith('_tbc') ? (ES[s.slice(0,-4)] || s.slice(0,-4)) + ' (por confirmar)' : s);
 const FAMS = [
-  {name:'視覺系統', color:[60,200,255]},
-  {name:'中央腦', color:[169,139,255]},
-  {name:'腹神經索（身體）', color:[255,179,71]},
-  {name:'上行／下行', color:[255,122,184]},
+  {name:'Sistema visual', color:[60,200,255]},
+  {name:'Cerebro central', color:[169,139,255]},
+  {name:'Cordón nervioso ventral (cuerpo)', color:[255,179,71]},
+  {name:'Ascendente / descendente', color:[255,122,184]},
 ];
 function famOf(s){
   if (s.startsWith('ol_') || s.startsWith('visual_')) return 0;
@@ -317,14 +317,14 @@ function famOf(s){
   if (s.startsWith('cb_') || s === 'ENS') return 1;
   return 3;
 }
-const EXEC = {FILLED:'已成交（模擬）', VETO:'風控否決', HOLD:'未下單', REJECTED:'被拒'};
+const EXEC = {FILLED:'Ejecutada (simulada)', VETO:'Vetada por control de riesgo', HOLD:'Sin orden', REJECTED:'Rechazada'};
 const REASON = {
-  'Price moved beyond neural observation tolerance':'神經運算期間價格變動超過容許範圍',
-  'Order cooldown':'下單冷卻中（兩單至少間隔 60&nbsp;秒）',
-  'Insufficient funds/position or below exchange minimum':'資金或持倉不足／低於交易所最小單位',
-  'Daily order limit':'已達每日下單上限', 'Spread limit':'買賣價差過大', 'Loss stop reached':'已達虧損停止線'
+  'Price moved beyond neural observation tolerance':'El precio se movió más allá de la tolerancia durante el cálculo neuronal',
+  'Order cooldown':'Periodo de espera entre órdenes (mínimo 60&nbsp;s)',
+  'Insufficient funds/position or below exchange minimum':'Fondos/posición insuficientes o por debajo del mínimo del exchange',
+  'Daily order limit':'Límite diario de órdenes alcanzado', 'Spread limit':'Spread demasiado alto', 'Loss stop reached':'Límite de pérdidas alcanzado'
 };
-const SIDE_ZH = {BUY:'買 BUY', SELL:'賣 SELL', HOLD:'持有 HOLD'};
+const SIDE_ES = {BUY:'COMPRAR / BUY', SELL:'VENDER / SELL', HOLD:'MANTENER / HOLD'};
 const SIDE_COL = {BUY:'#2fd18a', SELL:'#ff5d6c', HOLD:'#8f99ad'};
 let FLIES = [];  // filled from /flies.json (STONKFLY_FLIES)
 // Keep ~4 significant digits for sub-cent coins such as PEPE.
@@ -334,7 +334,7 @@ function fmtPrice(v){
   return v.toFixed(Math.min(12, 3 - Math.floor(Math.log10(v))));
 }
 const fmtQty = v => v >= 1000 ? v.toLocaleString(undefined, {maximumFractionDigits: 0}) : String(+v.toFixed(8));
-const STAGES = ['① 眼睛感光細胞看到價格圖', '② 視葉第一層（lamina）', '③ 視葉深層與視覺投射', '④ 中央腦與記憶中樞', '⑤ 遠端：腹神經索', '⑤ 遠端：腹神經索'];
+const STAGES = ['① Los fotorreceptores observan el gráfico de precio', '② Primera capa del lóbulo óptico (lámina)', '③ Capas profundas del lóbulo óptico y proyección visual', '④ Cerebro central y centro de memoria', '⑤ Zona distal: cordón nervioso ventral', '⑤ Zona distal: cordón nervioso ventral'];
 
 /* ---------------- brain view ---------------- */
 const brain = {theta:-0.9, phi:0.35, zoom:1, auto:true, mode:'activity', kc:false, eye:false};
@@ -368,11 +368,11 @@ function prepBrain(){
   sizeBrain(); new ResizeObserver(sizeBrain).observe($('#brainbox'));
   $('#legend').innerHTML =
     FAMS.map(f => `<span><i style="background:rgb(${f.color})"></i>${f.name}</span>`).join('') +
-    `<span><i style="background:#ffe08a;box-shadow:0 0 6px #ffd166"></i>放電中</span>` +
-    `<span><i style="background:var(--sell)"></i>DNp20 左（賣）</span><span><i style="background:var(--buy)"></i>DNp20 右（買）</span>` +
-    `<span><i style="background:var(--hot)"></i>DNpe017 閘門</span>` +
-    `<span><i style="border:2px solid var(--buy);background:none"></i>PAM11 獎勵多巴胺</span>` +
-    `<span><i style="border:2px solid var(--sell);background:none"></i>PPL101 懲罰多巴胺</span>`;
+    `<span><i style="background:#ffe08a;box-shadow:0 0 6px #ffd166"></i>Disparando</span>` +
+    `<span><i style="background:var(--sell)"></i>DNp20 izquierda (vender)</span><span><i style="background:var(--buy)"></i>DNp20 derecha (comprar)</span>` +
+    `<span><i style="background:var(--hot)"></i>Compuerta DNpe017</span>` +
+    `<span><i style="border:2px solid var(--buy);background:none"></i>Dopamina de recompensa PAM11</span>` +
+    `<span><i style="border:2px solid var(--sell);background:none"></i>Dopamina de castigo PPL101</span>`;
 }
 
 /* A new tick: replay propagation from the eyes, then fire the decision. */
@@ -405,8 +405,8 @@ function startWave(e, replay = false){
     const fb = document.querySelector('.flow .fb'); fb.classList.remove('lit-reward', 'lit-aversive'); fb.classList.add('lit-' + e.stimulus);
     setTimeout(() => fb.classList.remove('lit-' + e.stimulus), 5000);
     toast(e.stimulus === 'reward'
-      ? `<b>💊 獎勵刺激</b><br>上一步賺了 ${e.pnl.toFixed(4)} USDC → 刺激 15 顆 PAM11 多巴胺 200 ms`
-      : `<b>💊 懲罰刺激</b><br>上一步虧了 ${Math.abs(e.pnl).toFixed(4)} USDC → 刺激 2 顆 PPL101 多巴胺 200 ms`, e.stimulus);
+      ? `<b>💊 Estímulo de recompensa</b><br>El paso anterior ganó ${e.pnl.toFixed(4)} USDC → estimula 15 neuronas dopaminérgicas PAM11 durante 200 ms`
+      : `<b>💊 Estímulo aversivo</b><br>El paso anterior perdió ${Math.abs(e.pnl).toFixed(4)} USDC → estimula 2 neuronas dopaminérgicas PPL101 durante 200 ms`, e.stimulus);
   } else fx.stim = null;
 }
 function lightFlow(k){
@@ -415,8 +415,8 @@ function lightFlow(k){
 function fireDecision(e){
   lightFlow(e.side === 'HOLD' ? 3 : 4);
   setTimeout(() => lightFlow(-1), 3500);
-  fx.banner = {t0: now(), text: SIDE_ZH[e.side], color: SIDE_COL[e.side],
-    sub: (wave.replay ? `⟲ 重播第 ${e.tick} 步 · 當時` : '') + (EXEC[e.execution] || e.execution)};
+  fx.banner = {t0: now(), text: SIDE_ES[e.side], color: SIDE_COL[e.side],
+    sub: (wave.replay ? `⟲ Repetición del paso ${e.tick} · original: ` : '') + (EXEC[e.execution] || e.execution)};
   const g = META.groups;
   const origin = e.side === 'SELL' ? g.dnp20_L : e.side === 'BUY' ? g.dnp20_R : [...g.dnp20_L, ...g.dnp20_R];
   const count = e.execution === 'FILLED' ? 90 : 36;
@@ -428,9 +428,9 @@ function fireDecision(e){
   const side = $('#side'); side.classList.remove('pop'); void side.offsetWidth; side.classList.add('pop');
   const card = $('#decCard'); card.classList.remove('glow-BUY', 'glow-SELL', 'glow-HOLD'); void card.offsetWidth; card.classList.add('glow-' + e.side);
   const why = e.reason ? `<br>${REASON[e.reason] || e.reason}` : '';
-  if (e.execution === 'FILLED') toast(`<b>${e.side === 'BUY' ? '🟢 買入成交' : '🔴 賣出成交'}</b>（模擬）<br>${e.product.split('-')[0]} @ ${fmtPrice(+e.bid)}　右−左 ${e.diff_hz >= 0 ? '+' : ''}${e.diff_hz.toFixed(0)} Hz`, e.side);
-  else if (e.execution === 'VETO') toast(`<b>🛡 神經想${e.side === 'BUY' ? '買' : '賣'}，被風控否決</b>${why}`, 'veto');
-  else toast(`<b>⏸ 持有</b><br>右−左 ${e.diff_hz >= 0 ? '+' : ''}${e.diff_hz.toFixed(1)} Hz，閘門 ${e.gate} 次${e.gate ? '' : '（閘門沒開）'}`, 'HOLD');
+  if (e.execution === 'FILLED') toast(`<b>${e.side === 'BUY' ? '🟢 Compra ejecutada' : '🔴 Venta ejecutada'}</b> (simulada)<br>${e.product.split('-')[0]} @ ${fmtPrice(+e.bid)}　Derecha−izquierda ${e.diff_hz >= 0 ? '+' : ''}${e.diff_hz.toFixed(0)} Hz`, e.side);
+  else if (e.execution === 'VETO') toast(`<b>🛡 La mosca quiso ${e.side === 'BUY' ? 'COMPRAR' : 'VENDER'}, pero el control de riesgo la vetó</b>${why}`, 'veto');
+  else toast(`<b>⏸ Mantener</b><br>Derecha−izquierda ${e.diff_hz >= 0 ? '+' : ''}${e.diff_hz.toFixed(1)} Hz, compuerta ${e.gate} disparos${e.gate ? '' : ' (compuerta cerrada)'}`, 'HOLD');
 }
 function spark(i){
   const c = special.get(i);
@@ -575,14 +575,14 @@ function drawOverlay(){
       octx.beginPath(); octx.arc(SX[i], SY[i], (6 + gl * 3) * P, 0, 7);
       octx.fillStyle = gl > .2 ? col : 'rgba(0,0,0,.55)'; octx.fill();
       octx.strokeStyle = col; octx.lineWidth = 2*P; octx.stroke(); octx.restore();
-      lab.push([SX[i], SY[i], `${text} ${COUNTS ? COUNTS[i] : 0} 次`, col]);
+      lab.push([SX[i], SY[i], `${text} ${COUNTS ? COUNTS[i] : 0} disparos`, col]);
     }
   };
-  big(g.dnp20_L, '#ff5d6c', 'DNp20左'); big(g.dnp20_R, '#2fd18a', 'DNp20右'); big(g.gate, '#ffd166', '閘門');
+  big(g.dnp20_L, '#ff5d6c', 'DNp20 izq.'); big(g.dnp20_R, '#2fd18a', 'DNp20 der.'); big(g.gate, '#ffd166', 'Compuerta');
   const pr = groupCenter(g.reward), pa = groupCenter(g.aversive), pm = groupCenter(g.mbon);
-  if (pr) lab.push([pr[0], pr[1] - 14*P, 'PAM11 獎勵', '#2fd18a']);
-  if (pa) lab.push([pa[0], pa[1] + 18*P, 'PPL101 懲罰', '#ff5d6c']);
-  if (pm) lab.push([pm[0], pm[1] - 26*P, 'MBON 記憶輸出', '#c9b8ff']);
+  if (pr) lab.push([pr[0], pr[1] - 14*P, 'Recompensa PAM11', '#2fd18a']);
+  if (pa) lab.push([pa[0], pa[1] + 18*P, 'Castigo PPL101', '#ff5d6c']);
+  if (pm) lab.push([pm[0], pm[1] - 26*P, 'Salida de memoria MBON', '#c9b8ff']);
   // Place labels greedily so they never overlap each other or the stage HUD.
   octx.font = `${11*P}px system-ui, sans-serif`; octx.textBaseline = 'middle';
   const placed = [[0, 0, 330*P, 66*P]];
@@ -607,8 +607,8 @@ function drawHud(W, H, t){
   if (!wave.done) {
     stage = STAGES[Math.min(STAGES.length - 1, Math.max(0, Math.floor(el / HOP_S)))]; prog = Math.min(1, el / wave.len);
   } else if (el < wave.len + 4 && wave.event) {
-    stage = '⑥ 0.5 秒結束 → 決策：' + SIDE_ZH[wave.event.side]; prog = 1;
-  } else { stage = '等待下一步…神經元依上一步的頻率持續放電'; prog = null; }
+    stage = '⑥ Fin de 0,5 s → decisión: ' + SIDE_ES[wave.event.side]; prog = 1;
+  } else { stage = 'Esperando al siguiente paso… las neuronas siguen disparando según la frecuencia del paso anterior'; prog = null; }
   octx.font = `600 ${13*P}px system-ui, sans-serif`; octx.textBaseline = 'top';
   const w = Math.max(octx.measureText(stage).width, 160 * P) + 20*P;
   octx.fillStyle = 'rgba(4,7,14,.8)'; octx.fillRect(10*P, 10*P, w, prog === null ? 30*P : 52*P);
@@ -617,13 +617,13 @@ function drawHud(W, H, t){
     octx.fillStyle = '#1c2840'; octx.fillRect(20*P, 40*P, w - 20*P, 4*P);
     octx.fillStyle = '#3cc8ff'; octx.fillRect(20*P, 40*P, (w - 20*P) * prog, 4*P);
     octx.font = `${11*P}px system-ui, sans-serif`; octx.fillStyle = '#7c89a3';
-    octx.fillText(`放電 ${wave.spikes.toLocaleString()} / ${wave.total.toLocaleString()} 次`, 20*P, 47*P);
+    octx.fillText(`Disparos ${wave.spikes.toLocaleString()} / ${wave.total.toLocaleString()} disparos`, 20*P, 47*P);
   }
   octx.font = `${11*P}px system-ui, sans-serif`; octx.textBaseline = 'bottom'; octx.textAlign = 'right';
-  octx.fillStyle = 'rgba(124,137,163,.9)'; octx.fillText('慢動作 ×8 · 傳遞順序依突觸距離（示意）', W - 10*P, H - 8*P);
+  octx.fillStyle = 'rgba(124,137,163,.9)'; octx.fillText('Cámara lenta ×8 · orden de propagación según distancia sináptica (representación)', W - 10*P, H - 8*P);
   if (wave.replay && el < wave.len + 4) {
     octx.textBaseline = 'top'; octx.font = `700 ${13*P}px system-ui, sans-serif`;
-    const s = `⟲ 重播第 ${wave.event.tick} 步 · 僅動畫，不會下單`, w = octx.measureText(s).width + 16*P;
+    const s = `⟲ Repetición del paso ${wave.event.tick} · solo animación, no envía órdenes`, w = octx.measureText(s).width + 16*P;
     octx.fillStyle = 'rgba(40,28,6,.88)'; octx.fillRect(W - w - 10*P, 10*P, w, 24*P);
     octx.fillStyle = '#ffb347'; octx.fillText(s, W - w - 2*P, 15*P);
   }
@@ -632,7 +632,7 @@ function drawHud(W, H, t){
     const a = Math.max(0, 1 - (t - fx.stimT0) / 6), col = fx.stim === 'reward' ? '47,209,138' : '255,93,108';
     octx.font = `700 ${15*P}px system-ui, sans-serif`; octx.textBaseline = 'bottom';
     octx.fillStyle = `rgba(${col},${a})`;
-    octx.fillText(fx.stim === 'reward' ? '💊 獎勵多巴胺注入中' : '💊 懲罰多巴胺注入中', 14*P, H - 10*P);
+    octx.fillText(fx.stim === 'reward' ? '💊 Inyección de dopamina de recompensa' : '💊 Inyección de dopamina de castigo', 14*P, H - 10*P);
   }
   if (fx.banner) {
     const p = (t - fx.banner.t0) / 2.6;
@@ -657,9 +657,9 @@ function hover(e){
   for (let i = 0; i < META.n; i++) { const dx = SX[i] - mx, dy = SY[i] - my, dd = dx*dx + dy*dy; if (dd < bd) { bd = dd; best = i; } }
   const tip = $('#tip');
   if (best < 0) { tip.style.display = 'none'; return; }
-  const c = COUNTS ? COUNTS[best] : 0, ty = META.type_names[TYPE[best]] || '（未命名類型）', h = HOP[best];
-  tip.innerHTML = `<b>${ty}</b> · ${zh(META.superclasses[SC[best]])}<br>上一步放電 <b>${c}</b> 次（${(c / N_MS).toFixed(0)} Hz）` +
-    `<br>離眼睛 ${h === 255 ? '無路徑' : h + ' 個突觸'}`;
+  const c = COUNTS ? COUNTS[best] : 0, ty = META.type_names[TYPE[best]] || '(tipo sin nombre)', h = HOP[best];
+  tip.innerHTML = `<b>${ty}</b> · ${zh(META.superclasses[SC[best]])}<br>Disparos en el paso anterior: <b>${c}</b> disparos（${(c / N_MS).toFixed(0)} Hz）` +
+    `<br>Distancia desde el ojo: ${h === 255 ? 'sin ruta' : h + ' sinapsis'}`;
   tip.style.display = 'block';
   // r is on-screen (after the 16:9 stage scale); the tooltip is positioned in layout px.
   const k = r.width / ov.offsetWidth || 1, bx = (e.clientX - r.left) / k, by = (e.clientY - r.top) / k;
@@ -705,7 +705,7 @@ function bindBrain(){
   $('#bAuto').onclick = () => setAuto(!brain.auto);
   $('#bReplay').onclick = () => startWave(STATE && STATE.events[STATE.events.length - 1], true);
   $('#bMode').onclick = () => { brain.mode = brain.mode === 'activity' ? 'region' : 'activity';
-    $('#bMode').textContent = brain.mode === 'activity' ? '改成：依區域著色' : '改成：顯示放電'; };
+    $('#bMode').textContent = brain.mode === 'activity' ? 'Cambiar a: colorear por región' : 'Cambiar a: mostrar actividad'; };
   $('#bKC').onclick = () => { brain.kc = !brain.kc; $('#bKC').classList.toggle('on', brain.kc); $('#bKC').setAttribute('aria-pressed', brain.kc); };
   $('#bEye').onclick = () => { brain.eye = !brain.eye; $('#bEye').classList.toggle('on', brain.eye); $('#bEye').setAttribute('aria-pressed', brain.eye); };
 }
@@ -759,7 +759,7 @@ function drawEye(p){
 /* ---------------- charts ---------------- */
 function chart(el, opt){
   const W = 520, H = 170, L = 40, R = opt.right ? 44 : 10, T = 8, B = 20, iw = W - L - R, ih = H - T - B;
-  const n = opt.n; if (!n) { $(el).innerHTML = '<p class="sub">等待資料…</p>'; return; }
+  const n = opt.n; if (!n) { $(el).innerHTML = '<p class="sub">Esperando datos…</p>'; return; }
   const X = i => L + (n === 1 ? iw/2 : i * iw / (n - 1));
   let out = `<svg viewBox="0 0 ${W} ${H}">`;
   const scale = (vals, extra = []) => { let lo = Math.min(...vals, ...extra), hi = Math.max(...vals, ...extra); if (hi - lo < 1e-9) { lo -= 1; hi += 1; } const p = (hi - lo) * .08; return [lo - p, hi + p]; };
@@ -786,7 +786,7 @@ function chart(el, opt){
     });
   });
   out += `<line x1="${L}" x2="${W - R}" y1="${T + ih}" y2="${T + ih}" stroke="${cssv('--line')}"/>`;
-  if (opt.ticks) out += `<text class="axis" x="${L}" y="${H - 5}">第 ${opt.ticks[0]} 步</text><text class="axis" x="${W - R}" y="${H - 5}" text-anchor="end">第 ${opt.ticks[1]} 步</text>`;
+  if (opt.ticks) out += `<text class="axis" x="${L}" y="${H - 5}">Paso ${opt.ticks[0]}</text><text class="axis" x="${W - R}" y="${H - 5}" text-anchor="end">Paso ${opt.ticks[1]}</text>`;
   $(el).innerHTML = out + '</svg>';
 }
 function drawCharts(){
@@ -817,10 +817,10 @@ function drawCharts(){
     let s = `<svg viewBox="0 0 ${W} ${H}">`;
     h.forEach((v, i) => {
       const bh = v ? Math.max(1.5, Math.log1p(v) / Math.log1p(hm) * 130) : 0, mid = (ed[i] + ed[i + 1]) / 2;
-      s += `<rect x="${30 + i * bw}" y="${145 - bh}" width="${bw - 1}" height="${bh}" fill="${mid < .98 ? '#ff8a5c' : mid > 1.02 ? '#2fd18a' : '#a98bff'}"><title>${ed[i]}–${ed[i + 1]}：${v} 條</title></rect>`;
+      s += `<rect x="${30 + i * bw}" y="${145 - bh}" width="${bw - 1}" height="${bh}" fill="${mid < .98 ? '#ff8a5c' : mid > 1.02 ? '#2fd18a' : '#a98bff'}"><title>${ed[i]}–${ed[i + 1]}: ${v} conexiones</title></rect>`;
     });
     [0.1, 0.5, 1, 1.5, 2].forEach(v => { const x = 30 + (v - .1) / 1.9 * 480; s += `<text class="axis" x="${x}" y="162" text-anchor="middle">${v}</text>`; });
-    s += `<text class="axis" x="30" y="12">條數（對數刻度）</text>`;
+    s += `<text class="axis" x="30" y="12">Cantidad (escala logarítmica)</text>`;
     $('#cHist').innerHTML = s + '</svg>';
   }
 }
@@ -831,12 +831,12 @@ function drawSuperclass(){
   const rows = META.superclasses.map((s, j) => ({s, hz: sum[j] / META.superclass_sizes[j] / N_MS, size: META.superclass_sizes[j]}))
     .filter(r => r.size >= 20).sort((a, b) => b.hz - a.hz);
   const mx = Math.max(...rows.map(r => r.hz), 1e-9);
-  $('#scbars').innerHTML = rows.map(r => `<span title="${r.s}，${r.size.toLocaleString()} 個神經元">${zh(r.s)}</span><div class="bar"><div style="width:${r.hz / mx * 100}%;background:rgb(${FAMS[famOf(r.s)].color});color:rgb(${FAMS[famOf(r.s)].color})"></div></div><span class="num">${r.hz.toFixed(1)} Hz</span>`).join('');
+  $('#scbars').innerHTML = rows.map(r => `<span title="${r.s}，${r.size.toLocaleString()} neuronas">${zh(r.s)}</span><div class="bar"><div style="width:${r.hz / mx * 100}%;background:rgb(${FAMS[famOf(r.s)].color});color:rgb(${FAMS[famOf(r.s)].color})"></div></div><span class="num">${r.hz.toFixed(1)} Hz</span>`).join('');
 }
 
 /* ---------------- panels ---------------- */
 function toast(html, cls){
-  if (wave.replay) html = `<span style="color:var(--amber)">⟲ 重播第 ${wave.event.tick} 步（僅動畫，不會下單）</span><br>` + html;
+  if (wave.replay) html = `<span style="color:var(--amber)">⟲ Repetición del paso ${wave.event.tick} (solo animación, no envía órdenes)</span><br>` + html;
   const box = $('#toasts'), d = document.createElement('div');
   d.className = 'toast ' + (cls || ''); d.innerHTML = html; box.prepend(d);
   setTimeout(() => d.remove(), 6600);
@@ -851,25 +851,25 @@ function drawPanels(){
   $('#equity').textContent = e.equity.toFixed(2);
   const coin = e.product.split('-')[0];
   document.querySelectorAll('.coin').forEach(el => el.textContent = coin);
-  document.title = `Stonkfly ${coin} 果蠅`;
+  document.title = `Stonkfly ${coin} - Mosca`;
   $('#price').textContent = fmtPrice(+e.bid);
-  $('#compute').textContent = e.compute.toFixed(1) + ' 秒';
-  $('#side').textContent = SIDE_ZH[e.side]; $('#side').className = 'big ' + e.side + (e.execution === 'VETO' ? ' vetoed' : '');
-  $('#exec').innerHTML = `執行：<strong${e.execution === 'VETO' ? ' class="veto"' : ''}>${EXEC[e.execution] || e.execution}</strong>` + (e.reason ? `<br>${REASON[e.reason] || e.reason}` : '') +
-    `<br>現金 ${(+lg.cash || 0).toFixed(2)} USDC` + (lg.positions && Object.keys(lg.positions).length ? `，持有 ${Object.entries(lg.positions).map(([k, v]) => `${fmtQty(+v)} ${k.split('-')[0]}`).join('、')}` : '');
+  $('#compute').textContent = e.compute.toFixed(1) + ' s';
+  $('#side').textContent = SIDE_ES[e.side]; $('#side').className = 'big ' + e.side + (e.execution === 'VETO' ? ' vetoed' : '');
+  $('#exec').innerHTML = `Ejecución: <strong${e.execution === 'VETO' ? ' class="veto"' : ''}>${EXEC[e.execution] || e.execution}</strong>` + (e.reason ? `<br>${REASON[e.reason] || e.reason}` : '') +
+    `<br>Efectivo ${(+lg.cash || 0).toFixed(2)} USDC` + (lg.positions && Object.keys(lg.positions).length ? `, posiciones: ${Object.entries(lg.positions).map(([k, v]) => `${fmtQty(+v)} ${k.split('-')[0]}`).join('、')}` : '');
   const hzMax = Math.max(20, e.left_hz, e.right_hz);
   setBar('#barL', e.left_hz, hzMax); setBar('#barR', e.right_hz, hzMax);
   setBar('#barD', e.diff_hz, Math.max(10, Math.abs(e.diff_hz)), e.diff_hz > 2 ? 'var(--buy)' : e.diff_hz < -2 ? 'var(--sell)' : 'var(--hold)');
   setBar('#barG', e.gate, Math.max(10, e.gate));
   $('#numL').textContent = e.left_hz.toFixed(0) + ' Hz'; $('#numR').textContent = e.right_hz.toFixed(0) + ' Hz';
-  $('#numD').textContent = (e.diff_hz >= 0 ? '+' : '') + e.diff_hz.toFixed(0) + ' Hz'; $('#numG').textContent = e.gate + ' 次';
-  const st = {reward:'✅ 上一步賺錢 → 刺激 PAM11 獎勵多巴胺 200&nbsp;ms', aversive:'⚠️ 上一步虧錢 → 刺激 PPL101 懲罰多巴胺 200&nbsp;ms', none:'損益在 ±0.01&nbsp;USDC 內 → 沒有刺激'}[e.stimulus];
-  $('#reinf').innerHTML = `${st}<br>本步損益 ${e.pnl >= 0 ? '+' : ''}${e.pnl.toFixed(4)} USDC（含手續費）`;
+  $('#numD').textContent = (e.diff_hz >= 0 ? '+' : '') + e.diff_hz.toFixed(0) + ' Hz'; $('#numG').textContent = e.gate + ' disparos';
+  const st = {reward:'✅ El paso anterior ganó → dopamina de recompensa PAM11 durante 200&nbsp;ms', aversive:'⚠️ El paso anterior perdió → dopamina de castigo PPL101 durante 200&nbsp;ms', none:'Resultado dentro de ±0,01&nbsp;USDC → sin estímulo'}[e.stimulus];
+  $('#reinf').innerHTML = `${st}<br>Resultado de este paso: ${e.pnl >= 0 ? '+' : ''}${e.pnl.toFixed(4)} USDC (incluye comisiones)`;
   const m = Math.max(10, e.reward_spikes, e.aversive_spikes);
   setBar('#barRw', e.reward_spikes, m); setBar('#barAv', e.aversive_spikes, m); setBar('#barKC', e.kc_spikes, Math.max(100, e.kc_spikes));
-  $('#numRw').textContent = e.reward_spikes + ' 次'; $('#numAv').textContent = e.aversive_spikes + ' 次'; $('#numKC').textContent = e.kc_spikes.toLocaleString() + ' 次';
+  $('#numRw').textContent = e.reward_spikes + ' disparos'; $('#numAv').textContent = e.aversive_spikes + ' disparos'; $('#numKC').textContent = e.kc_spikes.toLocaleString() + ' disparos';
   const age = Date.now() / 1000 + SKEW - e.time, running = !STATE.stopped && !lg.halted && age < 180;
-  $('#status').textContent = STATE.stopped ? '已停止（STOP）' : lg.halted ? '已暫停：' + lg.halted : running ? (lg.mode === 'live' ? '運行中 · LIVE 真實下單' : '運行中 · paper 模擬') : '可能已停止';
+  $('#status').textContent = STATE.stopped ? 'Detenido (STOP)' : lg.halted ? 'Pausado: ' + lg.halted : running ? (lg.mode === 'live' ? 'En ejecución · LIVE con órdenes reales' : 'En ejecución · paper trading') : 'Posiblemente detenido';
   $('#status').className = 'pill ' + (running ? 'run' : 'stop');
   // Fly animation: buy fill → rocket; sell fill → party or broken tent by that sell's
   // realized P&L. Every other step (hold, vetoed proposal, stopped fly) grooms.
@@ -877,9 +877,9 @@ function drawPanels(){
   if (running && e.execution === 'FILLED' && e.side === 'BUY') anim = 'buy';
   else if (running && e.execution === 'FILLED' && e.side === 'SELL') anim = (e.trade_pnl ?? e.pnl) < 0 ? 'sell_loss' : 'sell_profit';
   // Card heading says which clip is playing and why; the legend highlights it.
-  const clipName = {buy: '火箭登月', sell_profit: '噴鈔派對', sell_loss: '破帳篷躺地', hold: '搓手洗臉'}[anim];
-  const clipWhy = anim !== 'hold' ? '' : !running ? '果蠅停機' : e.execution === 'VETO' ? '被風控擋下' : '觀望';
-  const nowText = '正在播：' + clipName + (clipWhy ? '（' + clipWhy + '）' : '');
+  const clipName = {buy: 'Cohete a la Luna', sell_profit: 'Fiesta de billetes', sell_loss: 'Tienda rota / derrota', hold: 'Aseo / espera'}[anim];
+  const clipWhy = anim !== 'hold' ? '' : !running ? 'Moscadetenida' : e.execution === 'VETO' ? 'vetada por control de riesgo' : 'esperando';
+  const nowText = 'Reproduciendo: ' + clipName + (clipWhy ? '（' + clipWhy + '）' : '');
   if ($('#flyNow').textContent !== nowText) $('#flyNow').textContent = nowText;
   document.querySelectorAll('#flyLegend li').forEach(li => {
     const on = li.dataset.anim === anim;
@@ -895,12 +895,12 @@ function drawPanels(){
     // Reduced motion or a manual pause shows the first frame as a still instead of looping.
     if (flyPaused || REDUCED.matches) vid.pause(); else vid.play().catch(() => {});
   }
-  $('#eyeSub').textContent = eye.only ? '果蠅實際「看到」的：每個點是一個感光細胞，白點看亮度（R1–R6），藍／綠點看顏色（R8）。' : '輸入的價格圖（半透明）＋每個感光細胞「看」的位置，亮度＝牠感受到的光。新的一步進來時會從左到右掃描。';
+  $('#eyeSub').textContent = eye.only ? 'MoscaLo que realmente “ve” la mosca: cada punto es un fotorreceptor. Los puntos blancos perciben luminosidad (R1–R6) y los azules/verdes perciben color (R8).' : 'Gráfico de precio de entrada (semitransparente) + posición observada por cada fotorreceptor; el brillo representa la luz percibida. Cuando llega un nuevo paso, se barre de izquierda a derecha.';
 }
 setInterval(() => {
   const e = STATE && STATE.events[STATE.events.length - 1]; if (!e) return;
   const left = Math.round(e.time + 60 - Date.now() / 1000 - SKEW);
-  $('#next').textContent = left > 0 ? `${left} 秒後` : '運算中…';
+  $('#next').textContent = left > 0 ? `${left} s` : 'Calculando…';
 }, 1000);
 
 // Chrome pauses video-only media in background tabs to save power, and a play() issued
@@ -913,8 +913,8 @@ document.addEventListener("visibilitychange", () => {
 function setFlyPaused(p){
   flyPaused = p;
   const v = $('#flyVid'), b = $('#flyToggle');
-  b.setAttribute('aria-pressed', p); b.setAttribute('aria-label', p ? '播放果蠅動畫' : '暫停果蠅動畫');
-  b.textContent = p ? '▶ 播放' : '❚❚ 暫停';
+  b.setAttribute('aria-pressed', p); b.setAttribute('aria-label', p ? 'Reproducir animación de la mosca' : 'Pausar animación de la mosca');
+  b.textContent = p ? '▶ Reproducir' : '❚❚ Pausar';
   if (p) v.pause(); else if (v.dataset.anim) v.play().catch(() => {});
 }
 $('#flyToggle').onclick = () => setFlyPaused(!flyPaused);
@@ -948,8 +948,8 @@ function applyTheme(theme, remember = true){
   if (light) root.dataset.theme = 'light'; else delete root.dataset.theme;
   document.querySelector('meta[name="theme-color"]').content = light ? '#eef2f8' : '#060a13';
   const b = $('#themeToggle');
-  b.innerHTML = light ? '<span aria-hidden="true">🌙</span> 黑夜模式' : '<span aria-hidden="true">☀️</span> 白天模式';
-  b.setAttribute('aria-label', light ? '切換到黑夜模式' : '切換到白天模式');
+  b.innerHTML = light ? '<span aria-hidden="true">🌙</span> Modo oscuro' : '<span aria-hidden="true">☀️</span> Modo claro';
+  b.setAttribute('aria-label', light ? 'Cambiar al modo oscuro' : 'Cambiar al modo claro');
   if (remember) {
     try { localStorage.setItem('stonkfly-theme', light ? 'light' : 'dark'); } catch (e) {}
     const url = new URL(location.href);
@@ -974,7 +974,7 @@ async function poll(){
       drawPanels(); drawCharts(); drawSuperclass();
       startWave(e);
     } else drawPanels();
-  } catch (err) { $('#status').textContent = '連不到伺服器，4 秒後自動重試…'; $('#status').className = 'pill stop'; }
+  } catch (err) { $('#status').textContent = 'No se puede conectar con el servidor. Reintentando automáticamente en 4 s…'; $('#status').className = 'pill stop'; }
 }
 async function init(){
   const [meta, pos, sc, ty, hop] = await Promise.all([
@@ -987,7 +987,7 @@ async function init(){
     : `<a style="color:var(--cyan)" href="${location.protocol}//${location.hostname}:${f.port}/">${f.name} →</a>`).join('　');
   prepBrain(); bindBrain();
   if (REDUCED.matches) { setAuto(false); $('#flyVid').removeAttribute('autoplay'); }
-  $('#bEyeMode').onclick = () => { eye.only = !eye.only; $('#bEyeMode').textContent = eye.only ? '改成：疊在原圖上' : '改成：只看果蠅看到的'; drawPanels(); eye.final = false; };
+  $('#bEyeMode').onclick = () => { eye.only = !eye.only; $('#bEyeMode').textContent = eye.only ? 'Cambiar a: superponer sobre la imagen original' : 'Cambiar a: mostrar solo lo que ve la mosca'; drawPanels(); eye.final = false; };
   await poll(); setInterval(poll, 4000); requestAnimationFrame(loop);
 }
 init();
