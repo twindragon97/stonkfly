@@ -53,3 +53,39 @@ To stop: Ctrl-C, or `touch runs/live/STOP` (`runs/paper/STOP` for paper). This s
 For an ordinary clean restart, use the same command and run directory. After reviewing a transient failure and reconciling account state, remove the STOP file if appropriate and pass `--resume-reviewed`. This cannot clear a drawdown or fee-overrun stop, bypass unresolved exchange outcomes, or accept changed source/configuration. A missing unknown order requires manual exchange investigation; do not assume it failed. Source changes require an explicitly reviewed state migration; use a fresh **paper** directory for development.
 
 All runtime state, balances, account IDs, data, `.env` and the default key filenames are git-ignored. Keep custom key paths outside the repository. Tests use doubles and never submit real orders. No live account credentials or real balances are bundled.
+
+## Docker updates and a stopped paper session
+
+The container supervisor keeps the dashboard and `/training` available when paper
+stops, including an intentional source/protocol mismatch after an image update.
+It does not restart the paper worker, clear its halt, change balances or overwrite
+its memory. The UI banner and container logs show an allowlisted diagnostic;
+`error.json` in the selected run directory contains the detailed local cause.
+The dashboard starts before dataset preparation, so preparation failures remain
+visible too. An existing dataset is verified rather than recompiled on each start.
+
+If `error.json` reports `Run source/protocol changed`, the stored provenance does
+not match the current image. To train, use `/training` directly; that creates
+separate sessions. To start fresh paper with the new image, change this environment
+setting in your compose file, retaining the same `/app/runs` volume:
+
+```yaml
+STONKFLY_RUN: "/app/runs/paper-historical-v1"
+```
+
+Choose an unused directory name. Both the dashboard and paper worker now honor this
+setting. This explicitly starts a fresh simulated balance and untrained memory;
+the previous `runs/paper/` directory and its checkpoints remain intact. To use a
+trained memory instead, follow [memory transfer](training.md). Do not delete the
+ledger, clear its provenance hash or use `--resume-reviewed` to bypass this check.
+
+After the new image is published, apply it from the compose directory:
+
+```sh
+docker compose pull stonkfly
+docker compose up -d --force-recreate stonkfly
+docker compose logs --tail=80 stonkfly
+```
+
+With the supplied port mapping the training UI is at
+`http://YOUR_SERVER:8766/training` (8765 is the internal container port).

@@ -66,4 +66,4 @@ async function poll(){try{const response=await fetch('/training.json',{cache:'no
 if(s.state==='completed'&&s.report){$('results').hidden=false;$('resultsEmpty').hidden=true;$('rows').replaceChildren();for(const [name,r] of [['Entrenada',s.report.trained],['Sin entrenar',s.report.untrained]]){const tr=document.createElement('tr');for(const value of [name,Number(r.equity).toFixed(2),r.return_pct.toFixed(2)+' %',r.max_drawdown_pct.toFixed(2)+' %',r.fills]){const td=document.createElement('td');td.textContent=value;tr.append(td);}$('rows').append(tr);}const r=s.report.trained;$('benchmarks').textContent=`Referencias: mantener efectivo ${r.cash_equity}; comprar y mantener BTC ${Number(r.buy_hold_equity).toFixed(2)}. ${r.halted?'Se activó el límite de pérdidas; las posiciones se siguieron valorando.':''}`;$('command').textContent=s.paper_command;}
 }catch(error){connected=false;$('state').textContent='Sin conexión';$('detail').textContent=error.message;}finally{controls();}}
 poll();setInterval(poll,1500);
-</script></body></html>
+</script><script src="/service-status.js"></script></body></html>

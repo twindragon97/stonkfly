@@ -344,6 +344,14 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         route = self.path.split("?")[0]
+        if route == "/service.json":
+            try:
+                service = json.loads((RUN / "service.json").read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                service = {"state": "unmanaged"}
+            return self.send(json.dumps(service).encode(), "application/json")
+        if route == "/service-status.js":
+            return self.send((HERE / "service-status.js").read_bytes(), "text/javascript; charset=utf-8")
         if route == "/training":
             return self.send((HERE / "training.html").read_bytes(), "text/html; charset=utf-8")
         if route == "/training.json":

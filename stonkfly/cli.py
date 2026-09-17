@@ -326,8 +326,10 @@ def main():
             ],
         }
         (out / "error.json").write_text(json.dumps(diagnostic, indent=2) + "\n")
+        from .diagnostics import public_diagnostic
+        hint = public_diagnostic(diagnostic)
         print(
-            f"Stopped safely: {type(e).__name__}. Inspect local state and reconcile before restarting.",
+            f"Stopped safely: {type(e).__name__}. Diagnostic: {hint['code']}; inspect error.json before restarting.",
             file=sys.stderr,
         )
         raise SystemExit(1) from None
