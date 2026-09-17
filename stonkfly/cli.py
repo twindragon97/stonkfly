@@ -2,7 +2,6 @@
 
 import argparse
 import dataclasses
-import fcntl
 import hashlib
 import json
 import os
@@ -49,6 +48,7 @@ def main():
         help="Freeze all memory efficacies for a control run",
     )
     run.add_argument("--out", type=Path)
+    run.add_argument("--memory", type=Path, help="Initialize a NEW paper run from trained memory")
     run.add_argument(
         "--products",
         nargs="+",
@@ -58,7 +58,22 @@ def main():
     run.add_argument("--neural-ms", type=float, default=500)
     status = sub.add_parser("status")
     status.add_argument("--out", type=Path, default=Path("runs/paper"))
+    train_parser = sub.add_parser("train", help="Accelerated historical Bitcoin training; simulated execution only")
+    train_parser.add_argument("--start-year", type=int, required=True)
+    train_parser.add_argument("--end-year", type=int, required=True)
+    train_parser.add_argument("--evaluation-year", type=int, required=True)
+    train_parser.add_argument("--interval", choices=("1h", "6h", "1d"), default="1d")
+    train_parser.add_argument("--epochs", type=int, default=1)
+    train_parser.add_argument("--neural-ms", type=float, choices=(100, 250, 500), default=500)
+    train_parser.add_argument("--csv", type=Path)
+    train_parser.add_argument("--cache", type=Path, default=Path("data/historical"))
+    train_parser.add_argument("--out", type=Path, required=True)
     a = p.parse_args()
+    if a.command == "train":
+        from .training import TrainingConfig, train
+        config = TrainingConfig(a.start_year, a.end_year, a.evaluation_year, a.interval, a.epochs, a.neural_ms)
+        train(config, a.out, a.cache, a.csv)
+        return
     from dotenv import load_dotenv
 
     # Never search parent projects for unrelated account credentials.
@@ -96,6 +111,8 @@ def main():
         return
     if a.live and (a.fixture or a.fast):
         p.error("Live mode forbids fixtures and fast replay")
+    if a.memory and a.live:
+        p.error("Memory initialization is paper-only")
     if a.steps < 0:
         p.error("steps cannot be negative")
     settings = Settings(
@@ -107,6 +124,7 @@ def main():
     out = a.out or Path("runs/live" if a.live else "runs/paper")
     out.mkdir(parents=True, exist_ok=True)
     lock = (out / "worker.lock").open("a")
+    import fcntl
     try:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
@@ -158,6 +176,15 @@ def main():
                 market.tick = previous["fixture_tick"]
         controller = FlyController(settings)
         cp = ledger.get("checkpoint")
+        if a.memory:
+            if cp or ledger.get("tick") or ledger.get("pretrained_memory_sha256"):
+                raise RuntimeError("Memory initialization requires a new paper run directory")
+            controller.load_memory(a.memory)
+            seed = out / "brain-seed.npz"
+            controller.save(seed)
+            with ledger.transaction():
+                ledger.put("checkpoint", {"file": seed.name, "sha256": hashlib.sha256(seed.read_bytes()).hexdigest()})
+                ledger.put("pretrained_memory_sha256", hashlib.sha256(a.memory.read_bytes()).hexdigest())
         if cp:
             path = out / cp["file"]
             if hashlib.sha256(path.read_bytes()).hexdigest() != cp["sha256"]:
@@ -172,6 +199,7 @@ def main():
             "feed": "fixture" if a.fixture else "coinbase-public",
             "decoder": "DNp20 mean R-L: buy/sell; DNpe017 spike gate; otherwise hold. Engineered fixed mapping.",
             "learning_validated": False,
+            "pretrained_memory_sha256": ledger.get("pretrained_memory_sha256"),
             "pain_receptors_modeled": False,
             "timing": "Each observation advances configured neural_ms regardless of wall-market time; no claim of real-time fly physiology.",
             "source_sha256": {

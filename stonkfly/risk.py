@@ -71,11 +71,12 @@ class Guard:
             "order_type": "limit_limit_fok",
         }
 
-    def before_submit(self, plan):
+    def before_submit(self, plan, now=None):
         # Called after exchange preview and balance checks, at the final send boundary.
         if self.stop_file.exists() or self.l.get("halted"):
             raise Veto("Execution stopped")
-        if not -0.5 <= time.time() - plan["quote_timestamp"] <= self.s.max_quote_age:
+        now = time.time() if now is None else now
+        if not -0.5 <= now - plan["quote_timestamp"] <= self.s.max_quote_age:
             raise Veto("Quote expired before submission")
         pending = self.l.pending()
         if (

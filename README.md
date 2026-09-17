@@ -36,4 +36,6 @@ python -m stonkfly status
 python -m pytest -q
 ```
 
+**Historical pretraining:** Open **Entrenar con históricos** in the dashboard to choose Bitcoin years, replay passes and a later frozen evaluation. The full neural graph is retained; speed and profitable learning are not guaranteed. [Training and memory transfer](docs/training.md).
+
 The repo does not come funded or connected to anyone’s account. Live execution needs your local credentials and explicit opt-in.

@@ -1,8 +1,8 @@
-"""Stonkfly live neural dashboard (read-only).
+"""Stonkfly neural dashboard and isolated historical paper training.
 
 Reads the checkpoints, events and ledger that `python -m stonkfly run` writes into
-a run directory and serves them to index.html. It never writes to the run and
-refuses every non-GET request.
+a run directory and serves them to index.html. The trading view is read-only;
+same-origin, token-protected POSTs can start/stop separate historical trainers.
 
 Usage (from the repository root):
     python dashboard/server.py [RUN_DIR]        # default: runs/paper
@@ -17,6 +17,9 @@ import sqlite3
 from decimal import Decimal
 import sys
 import time
+import secrets
+import threading
+from urllib.parse import urlsplit
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from types import SimpleNamespace
@@ -44,6 +47,10 @@ FLIES = [
 os.environ.setdefault("STONKFLY_DATA", str(ROOT / "data"))
 DATA = Path(os.environ["STONKFLY_DATA"])
 sys.path.insert(0, str(ROOT))
+from dashboard.training_jobs import TrainingJobs
+
+JOBS = TrainingJobs(ROOT, ROOT / "runs/training", DATA / "historical")
+STATIC_LOCK = threading.Lock()
 
 
 def build_static():
@@ -167,8 +174,16 @@ def hop_distance():
     return hop
 
 
-POS, SC, TYPE, META = build_static()
-HOP = hop_distance()
+POS = SC = TYPE = META = HOP = None
+
+
+def ensure_static():
+    global POS, SC, TYPE, META, HOP
+    with STATIC_LOCK:
+        if META is None:
+            pos, sc, types, meta = build_static()
+            hop = hop_distance()
+            POS, SC, TYPE, META, HOP = pos, sc, types, meta, hop
 _checkpoint = {"key": None}
 
 
@@ -329,6 +344,15 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         route = self.path.split("?")[0]
+        if route == "/training":
+            return self.send((HERE / "training.html").read_bytes(), "text/html; charset=utf-8")
+        if route == "/training.json":
+            return self.send(json.dumps({"token": JOBS.token, **JOBS.status()}).encode(), "application/json")
+        if route in ("/meta.json", "/pos.bin", "/sc.bin", "/hop.bin", "/type.bin"):
+            try:
+                ensure_static()
+            except (FileNotFoundError, ImportError):
+                return self.send_error(503, "Prepare the neural dataset first")
         if route in ("/", "/index.html"):
             return self.send((HERE / "index.html").read_bytes(), "text/html; charset=utf-8")
         if route == "/flies.json":
@@ -355,11 +379,35 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_range(ANIM_DIR / f"{m.group(1)}.mp4", "video/mp4")
         self.send_error(404)
 
-    # Read-only dashboard: refuse every method that could change state.
+    def do_POST(self):
+        # Browser CSRF protection, also works on a trusted LAN/Docker host.
+        # This is not user authentication; do not expose this server publicly.
+        origin = urlsplit(self.headers.get("Origin", ""))
+        token = self.headers.get("X-Training-Token", "")
+        if (origin.scheme not in ("http", "https") or origin.netloc != self.headers.get("Host")
+                or not secrets.compare_digest(token.encode(), JOBS.token.encode())):
+            return self.send_error(403, "Same-origin training token required")
+        if self.path not in ("/training/start", "/training/stop"):
+            return self.send_error(404)
+        try:
+            size = int(self.headers.get("Content-Length", "0"))
+            if not 0 < size <= 4096 or self.headers.get("Content-Type") != "application/json":
+                raise ValueError("Expected a small JSON request")
+            values = json.loads(self.rfile.read(size))
+            if not isinstance(values, dict):
+                raise ValueError("Expected a JSON object")
+            result = JOBS.start(values) if self.path.endswith("/start") else JOBS.stop()
+            self.send(json.dumps(result).encode(), "application/json")
+        except (ValueError, TypeError) as error:
+            self.send_response(400)
+            self.send_header("Content-Type", "application/json")
+            self.end_headers()
+            self.wfile.write(json.dumps({"error": str(error)}).encode())
+
     def refuse(self):
         self.send_error(405, "Read-only dashboard")
 
-    do_POST = do_PUT = do_PATCH = do_DELETE = refuse
+    do_PUT = do_PATCH = do_DELETE = refuse
 
     def log_message(self, *args):
         pass

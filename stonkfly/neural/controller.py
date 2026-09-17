@@ -1,6 +1,8 @@
 """Only RGB and engineered reinforcement enter the network. No market policy."""
 
 import hashlib
+import json
+from pathlib import Path
 
 import numpy as np
 
@@ -101,3 +103,41 @@ class FlyController:
 
     def restore(self, path):
         self.brain.restore(path)
+
+    def memory_signature(self):
+        from .common import digest
+        b = self.brain
+        return {"format": "stonkfly-memory-v1", "configuration": b.configuration_signature(),
+                "kernel": b.build["source_sha256"], "eta": b.eta,
+                "ids": digest(b.ids), "ptr": digest(b.ptr), "post": digest(b.post),
+                "edges": digest(b.circuit["edges"])}
+
+    def save_memory(self, path):
+        """Transfer learned efficacies, never balances, activity or order state."""
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = path.with_suffix(".partial")
+        with temporary.open("wb") as handle:
+            np.savez_compressed(handle, metadata=json.dumps(self.memory_signature()),
+                                memory_u=self.brain.memory_u, memory_w=self.brain.memory_w)
+        temporary.replace(path)
+
+    def load_memory(self, path):
+        from .rule import PARAMETERS
+        b = self.brain
+        with np.load(path, allow_pickle=False) as data:
+            if json.loads(str(data["metadata"])) != self.memory_signature():
+                raise ValueError("Pretrained memory provenance mismatch")
+            values = {}
+            for key in ("memory_u", "memory_w"):
+                value = data[key]
+                if (value.shape != getattr(b, key).shape or value.dtype != getattr(b, key).dtype
+                    or not np.isfinite(value).all()
+                    or np.any(value < PARAMETERS["minimum_fraction"] - 1)
+                    or np.any(value > PARAMETERS["maximum_fraction"] - 1)):
+                    raise ValueError("Invalid pretrained memory")
+                values[key] = value.copy()
+        b.reset()
+        for key, value in values.items():
+            getattr(b, key)[:] = value
+        b.weight[b.circuit["edges"]] = b.baseline_plastic * (1 + b.memory_w)
