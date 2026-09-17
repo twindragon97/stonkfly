@@ -2,22 +2,32 @@ services:
   stonkfly:
     image: ghcr.io/twindragon97/stonkfly:latest
     container_name: stonkfly
-
     restart: unless-stopped
 
-    volumes:
-      - /DATA/AppData/stonkfly/data:/app/data
-      - /DATA/AppData/stonkfly/runs:/app/runs
+    ports:
+      - "8766:8765"
 
     environment:
       TZ: Europe/Madrid
       PYTHONUNBUFFERED: "1"
 
+      HOST: "0.0.0.0"
+      PORT: "8765"
+
+      STONKFLY_DATA: "/app/data"
+      STONKFLY_RUN: "/app/runs/paper"
+      STONKFLY_VIZ_CACHE: "/app/dashboard/cache"
+
+    volumes:
+      - /DATA/AppData/stonkfly/data:/app/data
+      - /DATA/AppData/stonkfly/runs:/app/runs
+      - /DATA/AppData/stonkfly/dashboard-cache:/app/dashboard/cache
+
     deploy:
       resources:
         limits:
-          memory: 8G
           cpus: "8.0"
+          memory: 10G
         reservations:
-          memory: 1G
           cpus: "1.0"
+          memory: 1G
